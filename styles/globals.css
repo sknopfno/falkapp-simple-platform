@@ -39,8 +39,8 @@ code {
   display: flex;
   gap: 20px; /* Adds space between the buttons */
   justify-content: center; /* Centers the buttons */
-  margin-top: 200px; /* Adds some space above the buttons */
-  margin-bottom: -10em;
+  margin-top: 20px; /* Adds some space above the buttons */
+  margin-bottom: 20em;
 }
 
 .container {
