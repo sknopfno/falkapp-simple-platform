@@ -1,0 +1,29 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 40px;
+    background-color: #171002;
+    border-radius: 5px;
+    cursor: pointer;
+    border-width: 1px;
+    border: solid #251903;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    -webkit-text-fill-color: antiquewhite;
+  }
+  
+  .button:hover {
+    background-color: #251903;
+  }
+  
+  .image {
+    width: 18%;
+    height: 100%;
+  }
+  
+  .text {
+    display: block;
+  }
+  

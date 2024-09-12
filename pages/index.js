@@ -1,20 +1,45 @@
-import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import Head from 'next/head';
+import Header from '@components/Header';
+import Footer from '@components/Footer';
+import ButtonWithImage from '../components/ButtonWithImage';  // Import the ButtonWithImage component
+import StatCounter from '../components/StatCounter';
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
+      <title>Statistics Dashboard</title>
+        <meta name="description" content="Dynamic statistics counters" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+      <h1 className={styles.title}>Dashboard</h1>
+
+        <div className={styles.grid}>
+           {/* Four StatCounters for different topics */}
+          <StatCounter label="Active" value={0} increment={1} />
+          <StatCounter label="Leads" value={10} increment={2} />
+          <StatCounter label="Projects" value={5} increment={3} />
+          <StatCounter label="Errors" value={1} increment={1} />
+        </div>
+
+        {/* Add the buttons here */}
+        <div className="button-container">
+          <ButtonWithImage 
+            href="/test" 
+            src="/test-icon.png" 
+            alt="Test me icon" 
+            text="Test me" 
+          />
+          <ButtonWithImage 
+            href="/rejectionRateReview" 
+            src="/rr-review-icon.png" 
+            alt="RR Review icon" 
+            text="RR Review" 
+          />
+        </div>
       </main>
 
       <Footer />
