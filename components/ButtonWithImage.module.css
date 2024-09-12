@@ -4,18 +4,18 @@
     justify-content: center;
     width: 150px;
     height: 40px;
-    background-color: #171002;
+    background-color: #4a3a18;
     border-radius: 5px;
     cursor: pointer;
     border-width: 1px;
-    border: solid #251903;
+    border: solid #f4deb4;
     text-decoration: none;
     transition: background-color 0.3s ease;
     -webkit-text-fill-color: antiquewhite;
   }
   
   .button:hover {
-    background-color: #251903;
+    background-color: #baa06f;
   }
   
   .image {
