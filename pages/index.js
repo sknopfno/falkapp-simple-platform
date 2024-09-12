@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Header from '@components/Header';
 import Footer from '@components/Footer';
 import ButtonWithImage from '../components/ButtonWithImage';  // Import the ButtonWithImage component
 import StatCounter from '../components/StatCounter';
@@ -9,7 +8,7 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-      <title>Statistics Dashboard</title>
+      <title>falk.app</title>
         <meta name="description" content="Dynamic statistics counters" />
         <link rel="icon" href="/favicon.png" />
       </Head>
