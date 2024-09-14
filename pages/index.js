@@ -9,7 +9,7 @@ export default function Home() {
     <div className="container">
       <Head>
       <title>falk.app</title>
-        <meta name="description" content="Dynamic statistics counters" />
+        <meta name="description" content="falk.app" />
         <link rel="icon" href="/favicon.png" />
       </Head>
 

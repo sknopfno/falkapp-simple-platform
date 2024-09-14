@@ -5,5 +5,5 @@ export default function RejectionRateReviewPage() {
         <p>This is the dynamic "RR Review" page.</p>
       </div>
     );
+    
   }
-  
