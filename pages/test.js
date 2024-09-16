@@ -1,62 +1,63 @@
-import { useState, useRef } from 'react';
+import Head from 'next/head';
+import Footer from '@components/Footer';
 import ButtonWithImage from '../components/ButtonWithImage';  // Import the ButtonWithImage component
+import styles from '../styles/Home.module.css';
+import { useState } from 'react'; // Import useState to manage console messages
 
-export default function test() {
-  const [uploadStatus, setUploadStatus] = useState(null);
-  const fileInputRef = useRef(null); // Reference to the hidden file input
+export default function Test() {
+  const [consoleMessages, setConsoleMessages] = useState([]); // Initialize console messages state
 
-  // Function to trigger the file input dialog
-  const handleChooseAndUpload = async () => {
-    fileInputRef.current.click(); // Simulate click on the hidden file input
+  // Function to add a new message to the console
+  const logMessage = (message) => {
+    setConsoleMessages((prevMessages) => [...prevMessages, message]);
   };
 
-  // Handle file selection and automatic upload
-  const handleFileChange = async (e) => {
-    const selectedFiles = e.target.files;
-
-    if (selectedFiles.length > 0) {
-      const formData = new FormData();
-
-      for (const file of selectedFiles) {
-        formData.append('file', file);
-      }
-
-      // Upload the files
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        setUploadStatus('Files uploaded successfully');
-      } else {
-        setUploadStatus('Failed to upload files');
-      }
-    }
+  // Example: Simulate an upload failure message when clicking the Upload button
+  const handleUploadClick = () => {
+    logMessage("Upload failed: Network error");
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold mb-4">Upload</h1>
-      {/* Hidden file input */}
-      <input
-        type="file"
-        accept=".xlsx"
-        multiple
-        onChange={handleFileChange}
-        ref={fileInputRef}
-        style={{ display: 'none' }} // Hide the file input
-      />
+    <div className="container">
+      <Head>
+        <title>falk.app</title>
+        <meta name="description" content="falk.app" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
 
-      {/* The visible button for selecting and uploading files */}
-      <button
-        onClick={handleChooseAndUpload}
-        className="button"
-      >
-        Upload Files
-      </button>
+      <main>
+        <h1 className={styles.title}></h1>
 
-      {uploadStatus && <p className="mt-4">{uploadStatus}</p>}
+        {/* Console Window */}
+        <div className={styles.console}>
+          {consoleMessages.length > 0 ? (
+            consoleMessages.map((msg, index) => (
+              <p key={index} className={styles.consoleMessage}>{msg}</p>
+            ))
+          ) : (
+            <p className={styles.consolePlaceholder}>No messages</p>
+          )}
+        </div>
+
+        {/* Buttons */}
+        <div className="button-container">
+          <ButtonWithImage 
+            href="/" 
+            src="/upload.png" 
+            alt="upload" 
+            text="Upload"
+            onClick={handleUploadClick}  // Call the function to simulate an upload failure
+          />
+          <ButtonWithImage 
+            href="/" 
+            src="/download.png" 
+            alt="download" 
+            text="Download" 
+          />
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }

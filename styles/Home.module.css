@@ -29,3 +29,27 @@
     flex-wrap: wrap;
   }
   
+  .console {
+    width: 900px;
+    height: 400px;
+    background-color: #2c1906;
+    border: 1px solid #704f0b;
+    padding: 10px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  
+  .consoleMessage {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #ffe6b3;
+    margin: 5px 0;
+  }
+  
+  .consolePlaceholder {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #ffe6b3;
+    text-align: center;
+  }
+  
