@@ -66,7 +66,7 @@ export default function Test() {
       </Head>
 
       <main>
-        <h1 className={styles.title}>Test log</h1>
+        <h1 className={styles.title}></h1>
 
         {/* Console Window */}
         <div className={styles.console}>
