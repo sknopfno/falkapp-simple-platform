@@ -13,7 +13,7 @@ export default function Test() {
     setConsoleMessages((prevMessages) => [...prevMessages, message]);
   };
 
-  // Handle file selection and upload immediately after the user selects files
+  // Handle file selection and upload to the backend
   const handleFileChange = async (event) => {
     const files = event.target.files;
 
@@ -34,8 +34,8 @@ export default function Test() {
     });
 
     try {
-      // Make a POST request to upload files to Netlify function
-      const response = await fetch('/api/upload-xlsx', {
+      // Make a POST request to your backend to handle file uploads
+      const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
@@ -57,6 +57,32 @@ export default function Test() {
     }
   };
 
+  // Handle file download from Google Drive via backend
+  const handleDownloadClick = async () => {
+    try {
+      // Make a GET request to your backend to download files from Google Drive TODO MAKE API CALL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      const response = await fetch('/api/download', {
+        method: 'GET',
+      });
+
+      if (response.ok) {
+        logMessage("Files downloaded successfully.");
+        const blob = await response.blob();
+
+        // Create a link element to download the file
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'downloaded-files.zip';  // You can customize the file name TODO MAKE API CALL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        link.click();
+      } else {
+        logMessage("Download failed: " + response.statusText);
+      }
+    } catch (error) {
+      logMessage("Download failed: " + error.message);
+    }
+  };
+
+ 
   return (
     <div className="container">
       <Head>
@@ -91,19 +117,19 @@ export default function Test() {
 
         {/* Buttons */}
         <div className="button-container">
-          <ButtonWithImage 
-            href="/" 
-            src="/upload.png" 
-            alt="upload" 
-            text="Upload"
-            onClick={handleUploadClick}  // Trigger file input when button is clicked
-          />
-          <ButtonWithImage 
-            href="/" 
-            src="/download.png" 
-            alt="download" 
-            text="Download" 
-          />
+        <ButtonWithImage 
+        src="/upload.png" 
+        alt="upload" 
+        text="Upload"
+        onClick={handleUploadClick}  // Trigger file input when button is clicked
+        />
+        <ButtonWithImage 
+        src="/download.png" 
+        alt="download" 
+        text="Download"
+        onClick={handleDownloadClick}  // Trigger file download from Google Drive
+/>
+
         </div>
       </main>
 
