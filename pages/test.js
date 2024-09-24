@@ -60,7 +60,7 @@ export default function Test() {
   // Handle file download from Google Drive via backend
   const handleDownloadClick = async () => {
     try {
-      // Make a GET request to your backend to download files from Google Drive TODO MAKE API CALL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // Make a GET request to your backend to download files from Google Drive
       const response = await fetch('/api/download', {
         method: 'GET',
       });
@@ -72,7 +72,7 @@ export default function Test() {
         // Create a link element to download the file
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = 'downloaded-files.zip';  // You can customize the file name TODO MAKE API CALL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        link.download = 'downloaded-files.zip';  // Customize the file name if needed
         link.click();
       } else {
         logMessage("Download failed: " + response.statusText);
@@ -82,7 +82,6 @@ export default function Test() {
     }
   };
 
- 
   return (
     <div className="container">
       <Head>
@@ -117,23 +116,29 @@ export default function Test() {
 
         {/* Buttons */}
         <div className="button-container">
-        <ButtonWithImage 
-        src="/upload.png" 
-        alt="upload" 
-        text="Upload"
-        onClick={handleUploadClick}  // Trigger file input when button is clicked
-        />
-        <ButtonWithImage 
-        src="/download.png" 
-        alt="download" 
-        text="Download"
-        onClick={handleDownloadClick}  // Trigger file download from Google Drive
-/>
-
+          <ButtonWithImage 
+            src="/upload.png" 
+            alt="upload" 
+            text="Upload"
+            onClick={handleUploadClick}  // Trigger file input when button is clicked
+          />
+          <ButtonWithImage 
+            src="/download.png" 
+            alt="download" 
+            text="Download"
+            onClick={handleDownloadClick}  // Trigger file download from Google Drive
+          />
         </div>
       </main>
 
       <Footer />
     </div>
   );
+}
+
+// This ensures the page is statically generated at build time
+export async function getStaticProps() {
+  return {
+    props: {}, // No dynamic data, just ensure static generation
+  };
 }

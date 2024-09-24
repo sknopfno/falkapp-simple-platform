@@ -4,24 +4,24 @@ import ButtonWithImage from '../components/ButtonWithImage';  // Import the Butt
 import StatCounter from '../components/StatCounter';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Home({ stats }) {
   return (
     <div className="container">
       <Head>
-      <title>falk.app</title>
+        <title>falk.app</title>
         <meta name="description" content="falk.app" />
         <link rel="icon" href="/favicon.png" />
       </Head>
 
       <main>
-      <h1 className={styles.title}>Dashboard</h1>
+        <h1 className={styles.title}>Dashboard</h1>
 
         <div className={styles.grid}>
            {/* Four StatCounters for different topics */}
-          <StatCounter label="Active" value={0} increment={1} />
-          <StatCounter label="Leads" value={10} increment={2} />
-          <StatCounter label="Projects" value={5} increment={3} />
-          <StatCounter label="Errors" value={1} increment={1} />
+          <StatCounter label="Active" value={stats.active} increment={1} />
+          <StatCounter label="Leads" value={stats.leads} increment={2} />
+          <StatCounter label="Projects" value={stats.projects} increment={3} />
+          <StatCounter label="Errors" value={stats.errors} increment={1} />
         </div>
 
         {/* Add the buttons here */}
@@ -43,5 +43,20 @@ export default function Home() {
 
       <Footer />
     </div>
-  )
+  );
+}
+
+// Fetch the data at build time (even if static data)
+export async function getStaticProps() {
+  // Simulated data (could be fetched from an API or database)
+  const stats = {
+    active: 0,
+    leads: 10,
+    projects: 5,
+    errors: 1,
+  };
+
+  return {
+    props: { stats },  // Pass the stats as props to the component
+  };
 }
