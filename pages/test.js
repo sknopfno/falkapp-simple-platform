@@ -34,7 +34,7 @@ export default function Test() {
     });
 
     try {
-      // Make a POST request to your backend to handle file uploads
+      // Make a POST request to your backend to handle file uploads!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
@@ -60,7 +60,7 @@ export default function Test() {
   // Handle file download from Google Drive via backend
   const handleDownloadClick = async () => {
     try {
-      // Make a GET request to your backend to download files from Google Drive
+      // Make a GET request to your backend to download files from Google Drive!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       const response = await fetch('/api/download', {
         method: 'GET',
       });

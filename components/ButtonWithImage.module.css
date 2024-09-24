@@ -8,17 +8,19 @@
   font-size: 17px;
   border: 1px solid;
   border-color: #e6a412;
-  padding: 5px 10px;
+  padding: 10px; /* Adjusted padding for more uniform appearance */
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none; /* Ensure no underline for links */
   transition: background-color 0.3s ease;
+  width: 150px; /* Set a fixed width */
+  height: 50px; /* Optional: Set a fixed height to control button height */
 }
 
 /* Adjusting image size inside the button */
 .buttonWithImage img {
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 40px;
   margin-right: 10px;
 }
 
@@ -27,9 +29,8 @@
   background-color: #2c1906;
 }
 
-/* If you want to make sure the button doesn't grow too big */
+/* Prevent text overflow */
 .buttonWithImage {
-  max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
