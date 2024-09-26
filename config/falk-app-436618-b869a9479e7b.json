@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "falk-app-436618",
+  "private_key_id": "b869a9479e7bfdb02bbdf84211291e9d8066f76d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9V5lUvFiofLmS\nrazkkCASAxk1jKEFA6tEylVFEm9xbaLaMYl591zg9twjtee/CuEqi/VgTB5UYtsk\nqgk9YRIbIX1QMcqsRRuJxq3wseBjjyZfA2dUnqbHDAyGSsIDy5besmUS/e0m4prR\nneFAKPwjkxldznnQXvVUzBro+eD4x6FQO3axiwL1vdIkOtRdeo9u0P0dKybISStO\nDwkXYQbsUjxiisXbIn8+8fdPN/agDsDUbh7FjCLjwivj4W4/YxF6zbQIP96SrrcM\ngZcGezJpdDgNNlPFtH/wLw1gBAuZqAi6AVDy2MEzkWTHXA93z8yzgqCAI/zmH93M\nAQpo1pPNAgMBAAECggEAAaYRn7tEH7N2VOCjm287LZej+zi47jeUoN9iKV0lEJ0e\ncz1F2oSyOliWnM5TW5vXT2zd5h4Y5YM22qA1vw2+qp3QCYgQIQ/jqCoiuZsoPmBb\nZS29E0TjuY1RTpoNYRsUupEIcEc7GWuVDYjiZ+dIysaCd16k5juYHJ+VBxJQndnw\nofN6cte9f7lm/lwQnP4FQ0PeTRyA528yhwafA90J4xJQwKAe22WRhF7RNaRMhGjf\nH5GdgG44//G+wnqCVMuEGP+DNC4aYzksRjkykvyHxm3ZiFrWqcgJNi8wBCQ4iKBM\nP8lPmNtjP+lM4By6Pjt2BC1SnBiH9VD7PpK9pFwjwQKBgQD2NveU+WvGAhwNXFPB\nKASiZ5Ve342YMnSjAbRcRq+dWgkTZz3JPNwHUzshjdUehFhMrowrMbrgA3ky9mJy\ndBaWLFAVzcDMVHhJ6ggo9q//JOhpziUf8M/38AoBOsVain8y3erQGyigE5PCFEO2\nV5NBycsqgrrSqb0ffa8adHoZkwKBgQDE3gAdFtdPIsdtj4CoRG28md2baJ5ygECD\nHS9Kza2i8Uw6zXN/01FsSN9lsvPRzyCISXBsrakkmHlne0gwvejKoJwIPE14hsiY\neIsEHCh3UsU+TdqdbDSIzIbAe94W9ao8s1AzTyvlBzh/X9V/Rlm9UX1jaNyUePk4\nhkB+to15HwKBgQCRrzCLq5HDldf3Z9v+/KjRV60gd/KWTbSKByYrO4AKAQ5BtuLu\nQd6HTw476mpiJjkBFn7FyCUlC6kZKIRT6LC8pve0Dwy3WnvacGnnox+8PqBuipWY\n8qp7sEKbO6Uuz6g39utLu+Yr4amaOtdd+y+cy8Q1ISleISVQjtOfObBNlQKBgHO3\nciWnGWPgs4yIvz0pC7/CSWph8lCnZkQrUXMMtrWCVCZ0QSGvmrqlkvp6V6rJrvus\n/zJCWZuzLBlRc7uCxWTlRxHoMDlaMGq+4CfITVjmBB59MLU7tx156vMVXBPuzuPj\nGo8uSETVG7ZzJFEtju4jCir2pkF3YjaBY0OYFkxNAoGBAKYrB4bjD5eHuYUUsGyt\n+dMmAANNEKBaer9gZfqzlf8fCvctsdJOcshSO0KexcV6w5XN3ThKyZVf1s1tdpPg\n+Lq7KGoN1kNv922cCzIzVXGAusYQTyThjrQEHw+ai94yL06LsIkUwc/7Ts8gjwbb\nDHLgFUd81BBxSCIp8o/Irs1r\n-----END PRIVATE KEY-----\n",
+  "client_email": "falk-app@falk-app-436618.iam.gserviceaccount.com",
+  "client_id": "116652907803524361191",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/falk-app%40falk-app-436618.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

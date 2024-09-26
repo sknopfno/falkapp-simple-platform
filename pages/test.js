@@ -12,7 +12,11 @@ export default function Test() {
   const logMessage = (message) => {
     setConsoleMessages((prevMessages) => [...prevMessages, message]);
   };
-
+  // Function to clear the console messages
+  const handleClearLogClick = () => {
+    setConsoleMessages([]);  // Clear the console log by resetting the state
+    logMessage("Console log cleared.");  // Optional: Add a message to show the log has been cleared
+  };
   // Handle file selection and upload to the backend
   const handleFileChange = async (event) => {
     const files = event.target.files;
@@ -35,7 +39,7 @@ export default function Test() {
 
     try {
       // Make a POST request to your backend to handle file uploads
-      const response = await fetch('/api/upload', {
+      const response = await fetch('/netlify/functions/upload-to-drive.go', {
         method: 'POST',
         body: formData,
       });
@@ -124,10 +128,10 @@ export default function Test() {
         onClick={handleUploadClick}  // Trigger file input when button is clicked
         />
         <ButtonWithImage 
-        src="/download.png" 
-        alt="download" 
-        text="Download"
-        onClick={handleDownloadClick}  // Trigger file download from Google Drive
+        src="/clear.png" 
+        alt="Clear" 
+        text="Clear"
+        onClick={handleClearLogClick}  // Trigger clearing the console log
 />
 
         </div>

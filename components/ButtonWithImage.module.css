@@ -5,7 +5,7 @@
   justify-content: space-around;
   background-color: #171002;
   color: #ffe6b3;
-  font-size: 17px;
+  font-size: 19px;
   border: 1px solid;
   border-color: #e6a412;
   padding: 5px 10px;
@@ -13,12 +13,13 @@
   cursor: pointer;
   text-decoration: none; /* Ensure no underline for links */
   transition: background-color 0.3s ease;
+  width: 150px;
 }
 
 /* Adjusting image size inside the button */
 .buttonWithImage img {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   margin-right: 10px;
 }
 
