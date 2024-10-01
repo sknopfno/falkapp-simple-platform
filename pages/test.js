@@ -34,7 +34,7 @@ export default function Test() {
     // Prepare the form data for the file upload
     const formData = new FormData();
     xlsxFiles.forEach(file => {
-      formData.append('files', file);
+      formData.append('file', file);
     });
 
     try {
@@ -59,31 +59,6 @@ export default function Test() {
   const handleUploadClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();  // Trigger the hidden file input
-    }
-  };
-
-  // Handle file download from Google Drive via backend
-  const handleDownloadClick = async () => {
-    try {
-      // Make a GET request to your backend to download files from Google Drive!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      const response = await fetch('/api/download', {
-        method: 'GET',
-      });
-
-      if (response.ok) {
-        logMessage("Files downloaded successfully.");
-        const blob = await response.blob();
-
-        // Create a link element to download the file
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'downloaded-files.zip';  // Customize the file name if needed
-        link.click();
-      } else {
-        logMessage("Download failed: " + response.statusText);
-      }
-    } catch (error) {
-      logMessage("Download failed: " + error.message);
     }
   };
 
