@@ -38,13 +38,9 @@ export default function Test() {
     });
 
     try {
-<<<<<<< HEAD
       // Make a POST request to your backend to handle file uploads
       const response = await fetch('/netlify/functions/upload-to-drive.go', {
-=======
-      // Make a POST request to your backend to handle file uploads!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      const response = await fetch('/api/upload', {
->>>>>>> main
+
         method: 'POST',
         body: formData,
       });
@@ -125,8 +121,8 @@ export default function Test() {
 
         {/* Buttons */}
         <div className="button-container">
-<<<<<<< HEAD
-        <ButtonWithImage 
+          
+          <ButtonWithImage 
         src="/upload.png" 
         alt="upload" 
         text="Upload"
@@ -138,21 +134,6 @@ export default function Test() {
         text="Clear"
         onClick={handleClearLogClick}  // Trigger clearing the console log
 />
-
-=======
-          <ButtonWithImage 
-            src="/upload.png" 
-            alt="upload" 
-            text="Upload"
-            onClick={handleUploadClick}  // Trigger file input when button is clicked
-          />
-          <ButtonWithImage 
-            src="/download.png" 
-            alt="download" 
-            text="Download"
-            onClick={handleDownloadClick}  // Trigger file download from Google Drive
-          />
->>>>>>> main
         </div>
       </main>
 
