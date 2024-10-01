@@ -141,10 +141,3 @@ export default function Test() {
     </div>
   );
 }
-
-// This ensures the page is statically generated at build time
-export async function getStaticProps() {
-  return {
-    props: {}, // No dynamic data, just ensure static generation
-  };
-}
