@@ -39,7 +39,7 @@ export default function Test() {
 
     try {
       // Make a POST request to your backend to handle file uploads
-      const response = await fetch('/.netlify/functions/upload-to-drive', {
+      const response = await fetch('/netlify/functions/upload-to-drive', {
 
         method: 'POST',
         body: formData,
