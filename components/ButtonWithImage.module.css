@@ -13,23 +13,14 @@
   cursor: pointer;
   text-decoration: none; /* Ensure no underline for links */
   transition: background-color 0.3s ease;
-<<<<<<< HEAD
-  width: 150px;
-=======
   width: 150px; /* Set a fixed width */
   height: 50px; /* Optional: Set a fixed height to control button height */
->>>>>>> main
 }
 
 /* Adjusting image size inside the button */
 .buttonWithImage img {
-<<<<<<< HEAD
-  width: 35px;
-  height: 35px;
-=======
   width: 45px;
   height: 40px;
->>>>>>> main
   margin-right: 10px;
 }
 

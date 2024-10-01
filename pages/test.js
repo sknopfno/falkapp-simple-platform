@@ -39,7 +39,7 @@ export default function Test() {
 
     try {
       // Make a POST request to your backend to handle file uploads
-      const response = await fetch('/netlify/functions/upload-to-drive.go', {
+      const response = await fetch('/.netlify/functions/upload-to-drive', {
 
         method: 'POST',
         body: formData,
@@ -121,7 +121,7 @@ export default function Test() {
 
         {/* Buttons */}
         <div className="button-container">
-          
+
           <ButtonWithImage 
         src="/upload.png" 
         alt="upload" 

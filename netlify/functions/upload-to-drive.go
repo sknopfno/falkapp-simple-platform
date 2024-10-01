@@ -2,105 +2,72 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
-	"log"
-	"mime/multipart"
 	"net/http"
 	"os"
-	"time"
+	"strings"
 
-	"golang.org/x/oauth2/google"
 	"google.golang.org/api/drive/v3"
 	"google.golang.org/api/option"
 )
 
-// Authenticate and create a Drive client using the service account credentials
-func createDriveService() (*drive.Service, error) {
+func getDriveService() (*drive.Service, error) {
+	clientEmail := os.Getenv("GOOGLE_CLIENT_EMAIL")
+	privateKey := os.Getenv("GOOGLE_PRIVATE_KEY")
+
+	// Create credentials in JSON format
+	credentials := fmt.Sprintf(`{
+        "type": "service_account",
+        "client_email": "%s",
+        "private_key": "%s"
+    }`, clientEmail, strings.ReplaceAll(privateKey, "\\n", "\n"))
+
 	ctx := context.Background()
-	credentials, err := os.ReadFile("config/falk-app-436618-b869a9479e7b.json") // Ensure the correct path to credentials.json
+	srv, err := drive.NewService(ctx, option.WithCredentialsJSON([]byte(credentials)))
 	if err != nil {
-		return nil, fmt.Errorf("unable to read service account credentials: %v", err)
+		return nil, fmt.Errorf("unable to create Drive client: %v", err)
 	}
-
-	config, err := google.CredentialsFromJSON(ctx, credentials, drive.DriveFileScope)
-	if err != nil {
-		return nil, fmt.Errorf("unable to parse client secret file to config: %v", err)
-	}
-
-	driveService, err := drive.NewService(ctx, option.WithCredentials(config))
-	if err != nil {
-		return nil, fmt.Errorf("unable to retrieve Drive client: %v", err)
-	}
-	return driveService, nil
+	return srv, nil
 }
-
-// Handler for file upload
-func uploadHandler(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		http.Error(w, "Only POST method is allowed", http.StatusMethodNotAllowed)
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	err := r.ParseMultipartForm(10 << 20) // 10 MB max file size
+	// Parse the form to retrieve the file
+	r.ParseMultipartForm(10 << 20) // Limit file size to 10MB
+	file, _, err := r.FormFile("file")
 	if err != nil {
-		http.Error(w, "Error parsing form data", http.StatusBadRequest)
+		http.Error(w, "Failed to read file", http.StatusBadRequest)
 		return
 	}
+	defer file.Close()
 
-	files := r.MultipartForm.File["files"]
-	if len(files) == 0 {
-		http.Error(w, "No files uploaded", http.StatusBadRequest)
-		return
-	}
-
-	driveService, err := createDriveService()
+	// Initialize Google Drive service
+	srv, err := getDriveService()
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Failed to create Drive service: %v", err), http.StatusInternalServerError)
+		http.Error(w, "Failed to create Google Drive client", http.StatusInternalServerError)
 		return
 	}
 
-	for _, fileHeader := range files {
-		if fileHeader.Filename[len(fileHeader.Filename)-5:] != ".xlsx" {
-			http.Error(w, "Only .xlsx files are allowed", http.StatusBadRequest)
-			return
-		}
-
-		file, err := fileHeader.Open()
-		if err != nil {
-			http.Error(w, "Unable to open uploaded file", http.StatusInternalServerError)
-			return
-		}
-		defer file.Close()
-
-		uploadedFile, err := uploadToDrive(driveService, file, fileHeader.Filename)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Failed to upload file: %v", err), http.StatusInternalServerError)
-			return
-		}
-
-		fmt.Fprintf(w, "File '%s' uploaded successfully to Google Drive.\n", uploadedFile.Name)
-	}
-}
-
-// Function to upload the file to Google Drive
-func uploadToDrive(service *drive.Service, file multipart.File, filename string) (*drive.File, error) {
+	// Upload file to Google Drive
 	driveFile := &drive.File{
-		Name:    filename,
-		Parents: []string{"1DORdLN_vzbiThwkueh1axWXrrDod1bZJ"}, // Specify the folder ID if needed
+		Name: "UploadedFile",
 	}
-
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*2)
-	defer cancel()
-
-	uploadedFile, err := service.Files.Create(driveFile).Media(file).Context(ctx).Do()
+	uploadFile, err := srv.Files.Create(driveFile).Media(file).Do()
 	if err != nil {
-		return nil, fmt.Errorf("unable to upload file to Drive: %v", err)
+		http.Error(w, "Failed to upload file to Google Drive", http.StatusInternalServerError)
+		return
 	}
 
-	return uploadedFile, nil
+	// Send response back
+	response := map[string]string{"message": "File uploaded successfully", "fileId": uploadFile.Id}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
-
 func main() {
-	http.HandleFunc("/upload", uploadHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	http.HandleFunc("/upload-to-drive", handler)
+	http.ListenAndServe(":8080", nil)
 }
