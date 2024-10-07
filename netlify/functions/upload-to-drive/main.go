@@ -3,39 +3,56 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"io"
+	"net/http"
+	"os"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-// Response represents the response format for the lambda function
-type Response struct {
-	Message string `json:"message"`
-}
-
-// Handler is the lambda entry point
-func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	response := Response{
-		Message: "API Gateaway ready labda function ready ;)",
+func handler(ctx context.Context, req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	// Decode the base64-encoded file data from the request body
+	var requestBody struct {
+		Files []string `json:"files"`
 	}
 
-	body, err := json.Marshal(response)
-	if err != nil {
-		return events.APIGatewayProxyResponse{
-			StatusCode: 500,
-			Body:       "Internal Server Error",
-		}, err
+	if err := json.Unmarshal([]byte(req.Body), &requestBody); err != nil {
+		return &events.APIGatewayProxyResponse{StatusCode: http.StatusBadRequest}, nil
 	}
 
-	return events.APIGatewayProxyResponse{
-		StatusCode: 200,
-		Body:       string(body),
-		Headers: map[string]string{
-			"Content-Type": "application/json",
-		},
+	for _, fileData := range requestBody.Files {
+		// Convert base64 string to bytes
+		decodedData, err := decodeBase64File(fileData)
+		if err != nil {
+			return &events.APIGatewayProxyResponse{StatusCode: http.StatusInternalServerError}, nil
+		}
+
+		// Here you can add logic to handle the uploaded file (e.g., save it to Google Drive)
+		// For demonstration, we will save it locally
+		err = saveFile("uploaded_file.xlsx", decodedData)
+		if err != nil {
+			return &events.APIGatewayProxyResponse{StatusCode: http.StatusInternalServerError}, nil
+		}
+	}
+
+	return &events.APIGatewayProxyResponse{
+		StatusCode: http.StatusOK,
+		Body:       "Files uploaded successfully",
 	}, nil
 }
 
+// decodeBase64File decodes a base64 encoded string into bytes.
+func decodeBase64File(data string) ([]byte, error) {
+	return io.ReadAll(strings.NewReader(data))
+}
+
+// saveFile saves the byte data to a specified filename.
+func saveFile(filename string, data []byte) error {
+	return os.WriteFile(filename, data, 0644)
+}
+
 func main() {
-	lambda.Start(Handler)
+	lambda.Start(handler)
 }

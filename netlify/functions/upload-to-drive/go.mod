@@ -1,5 +1,7 @@
-module github.com/someone/upload-to-drive
+module upload-to-drive
 
-go 1.19
+go 1.23.0
 
 require github.com/aws/aws-lambda-go v1.47.0
+
+require github.com/stretchr/testify v1.9.0 // indirect
